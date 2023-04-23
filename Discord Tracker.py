@@ -6,10 +6,10 @@ import dotenv
 
 dotenv.load_dotenv()
 
-API_KEY = getenv('APIkey')
+API_KEY = getenv('APIkey') #get new API Key
 REGION = "NA1"
 SUMMONER_NAME = "bawng"
-DISCORD_TOKEN = getenv('token')
+DISCORD_TOKEN = getenv('token') 
 #DISCORD_CHANNEL_ID = 1099595483447566349 # Replace with your Discord channel ID
 client = commands.Bot(command_prefix='!', intents=discord.Intents.all())
 
@@ -35,8 +35,8 @@ def get_game_status(summoner_id):
     else:
         raise Exception(f"Failed to retrieve game status: {response.status_code}")
 
-@tasks.loop(seconds=5)
-async def check_game_status(HELLO):
+@tasks.loop(hours=1)
+async def check_game_status():
     summoner_id = get_summoner_id()
     game_status = get_game_status(summoner_id)
     USER_ID = await client.fetch_user(535711912160133120)
@@ -48,6 +48,6 @@ async def check_game_status(HELLO):
 @client.event
 async def on_ready():
     print('Logged in as {0.user}'.format(client))
-    check_game_status.start('HITHERE')
+    check_game_status.start()
 
 client.run(DISCORD_TOKEN)
