@@ -13,6 +13,10 @@ DISCORD_TOKEN = getenv('token')
 #DISCORD_CHANNEL_ID = 1099595483447566349 # Replace with your Discord channel ID
 client = commands.Bot(command_prefix='!', intents=discord.Intents.all())
 
+@client.command()
+async def hello(message):
+        await message.channel.send('Hello, meldeeznuts!')
+
 @client.event
 async def on_ready():
     print('Logged in as {0.user}'.format(client))

@@ -7,6 +7,7 @@ API_KEY = getenv('APIkey')
 REGION = "NA1"
 SUMMONER_NAME = "bawng"
 
+#prints in terminal
 def get_summoner_id():
     url = f"https://{REGION}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{SUMMONER_NAME}?api_key={API_KEY}"
     response = requests.get(url)
